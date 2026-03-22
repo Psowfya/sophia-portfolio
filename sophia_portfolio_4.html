@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ejiogu Sophia Chinaza — Operations & Data Professional</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0d1b2a;
+    --navy2: #112240;
+    --blue: #1a3a6b;
+    --accent: #c8922a;
+    --accent2: #e8b44a;
+    --cream: #f5f0e8;
+    --white: #fdfcfa;
+    --text: #1a1a2e;
+    --muted: #6b7280;
+    --border: rgba(200,146,42,0.25);
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'DM Sans', sans-serif; background: var(--navy); color: var(--white); overflow-x: hidden; }
+
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.2rem 3rem;
+    background: rgba(13,27,42,0.92); backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo { font-family: 'Playfair Display', serif; font-size: 1.4rem; font-weight: 700; color: var(--accent2); }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a { color: rgba(253,252,250,0.7); text-decoration: none; font-size: 0.82rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--accent2); }
+
+  .hero {
+    min-height: 100vh; display: flex; align-items: center;
+    padding: 8rem 3rem 4rem; position: relative; overflow: hidden;
+  }
+  .hero-bg {
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse 80% 60% at 70% 50%, rgba(26,58,107,0.5) 0%, transparent 70%),
+      radial-gradient(ellipse 40% 40% at 20% 80%, rgba(200,146,42,0.12) 0%, transparent 60%),
+      linear-gradient(160deg, #0d1b2a 0%, #112240 60%, #0d1b2a 100%);
+  }
+  .hero-grid {
+    position: absolute; inset: 0; opacity: 0.04;
+    background-image: linear-gradient(var(--accent) 1px, transparent 1px), linear-gradient(90deg, var(--accent) 1px, transparent 1px);
+    background-size: 60px 60px;
+  }
+  .hero-content { position: relative; max-width: 780px; }
+  .hero-tag {
+    display: inline-block; margin-bottom: 1.5rem; padding: 0.4rem 1rem;
+    border: 1px solid var(--border); border-radius: 2px;
+    font-family: 'DM Mono', monospace; font-size: 0.72rem; letter-spacing: 0.15em;
+    color: var(--accent2); text-transform: uppercase;
+    animation: fadeUp 0.6s ease both;
+  }
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(3rem, 6vw, 5.5rem); font-weight: 900; line-height: 1.05;
+    letter-spacing: -0.02em; color: var(--white);
+    animation: fadeUp 0.6s 0.1s ease both;
+  }
+  .hero h1 span { color: var(--accent2); }
+  .hero-sub {
+    margin-top: 1.5rem; font-size: 1.05rem; line-height: 1.75;
+    color: rgba(253,252,250,0.7); max-width: 580px;
+    animation: fadeUp 0.6s 0.2s ease both;
+  }
+  .hero-stats { display: flex; gap: 3rem; margin-top: 3rem; animation: fadeUp 0.6s 0.3s ease both; }
+  .stat-num { font-family: 'Playfair Display', serif; font-size: 2.2rem; font-weight: 700; color: var(--accent2); }
+  .stat-label { font-size: 0.75rem; color: rgba(253,252,250,0.5); letter-spacing: 0.06em; text-transform: uppercase; margin-top: 2px; }
+  .hero-cta { display: flex; gap: 1rem; margin-top: 2.5rem; animation: fadeUp 0.6s 0.4s ease both; }
+  .btn { padding: 0.85rem 2rem; border-radius: 2px; font-size: 0.85rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; text-decoration: none; cursor: pointer; transition: all 0.25s; border: none; display: inline-block; }
+  .btn-primary { background: var(--accent); color: var(--navy); }
+  .btn-primary:hover { background: var(--accent2); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(200,146,42,0.3); }
+  .btn-outline { background: transparent; color: var(--white); border: 1px solid rgba(253,252,250,0.3); }
+  .btn-outline:hover { border-color: var(--accent2); color: var(--accent2); transform: translateY(-2px); }
+
+  section { padding: 6rem 3rem; }
+  .section-label { font-family: 'DM Mono', monospace; font-size: 0.7rem; letter-spacing: 0.2em; color: var(--accent); text-transform: uppercase; margin-bottom: 0.6rem; }
+  .section-title { font-family: 'Playfair Display', serif; font-size: clamp(2rem, 3.5vw, 3rem); font-weight: 700; color: var(--white); margin-bottom: 1rem; }
+  .section-title span { color: var(--accent2); }
+  .section-desc { color: rgba(253,252,250,0.6); line-height: 1.75; max-width: 600px; margin-bottom: 3rem; }
+
+  #about { background: var(--navy2); }
+  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start; max-width: 1100px; margin: 0 auto; }
+  .about-text { color: rgba(253,252,250,0.75); line-height: 1.85; font-size: 1rem; }
+  .about-text p + p { margin-top: 1.2rem; }
+  .highlight { color: var(--accent2); font-weight: 600; }
+  .ach-item { display: flex; align-items: flex-start; gap: 1rem; padding: 1.2rem 0; border-bottom: 1px solid rgba(200,146,42,0.15); }
+  .ach-icon { width: 40px; height: 40px; flex-shrink: 0; background: rgba(200,146,42,0.1); border: 1px solid var(--border); border-radius: 2px; display: flex; align-items: center; justify-content: center; font-size: 1.1rem; }
+  .ach-num { font-family: 'Playfair Display', serif; font-size: 1.4rem; color: var(--accent2); font-weight: 700; }
+  .ach-desc { font-size: 0.82rem; color: rgba(253,252,250,0.5); margin-top: 2px; }
+
+  #projects { background: var(--navy); }
+  .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px,1fr)); gap: 1.5rem; max-width: 1200px; margin: 0 auto; }
+  .project-card { background: rgba(255,255,255,0.03); border: 1px solid rgba(200,146,42,0.15); border-radius: 4px; overflow: hidden; transition: all 0.3s; display: flex; flex-direction: column; }
+  .project-card:hover { border-color: rgba(200,146,42,0.5); transform: translateY(-4px); box-shadow: 0 20px 48px rgba(0,0,0,0.4); }
+  .project-header { padding: 1.5rem 1.5rem 1rem; background: rgba(26,58,107,0.25); border-bottom: 1px solid rgba(200,146,42,0.1); }
+  .project-type { font-family: 'DM Mono', monospace; font-size: 0.62rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.5rem; }
+  .project-title { font-family: 'Playfair Display', serif; font-size: 1.1rem; font-weight: 700; color: var(--white); }
+  .project-body { padding: 1.2rem 1.5rem; flex: 1; }
+  .project-desc { font-size: 0.86rem; color: rgba(253,252,250,0.6); line-height: 1.7; margin-bottom: 1.2rem; }
+  .demo-area { background: rgba(0,0,0,0.3); border-radius: 3px; padding: 1.2rem; margin-bottom: 1.2rem; border: 1px solid rgba(255,255,255,0.06); }
+  .demo-label { font-family: 'DM Mono', monospace; font-size: 0.6rem; letter-spacing: 0.12em; color: var(--accent); text-transform: uppercase; margin-bottom: 0.8rem; display: flex; align-items: center; gap: 0.5rem; }
+  .live-dot { width: 6px; height: 6px; border-radius: 50%; background: #22c55e; animation: pulse 1.5s infinite; }
+  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.4} }
+
+  .metrics-row { display: flex; gap: 0.7rem; }
+  .metric-box { flex: 1; text-align: center; padding: 0.8rem 0.4rem; background: rgba(255,255,255,0.04); border-radius: 3px; border: 1px solid rgba(200,146,42,0.15); }
+  .metric-num { font-family: 'Playfair Display', serif; font-size: 1.35rem; color: var(--accent2); font-weight: 700; }
+  .metric-lbl { font-size: 0.58rem; color: rgba(253,252,250,0.45); text-transform: uppercase; letter-spacing: 0.06em; margin-top: 2px; }
+
+  .bar-chart { display: flex; align-items: flex-end; gap: 6px; height: 80px; padding-bottom: 20px; position: relative; }
+  .bar { flex: 1; border-radius: 2px 2px 0 0; background: linear-gradient(to top, var(--accent), var(--accent2)); opacity: 0.85; position: relative; animation: growBar 1s ease both; transition: opacity 0.2s; }
+  .bar:hover { opacity: 1; }
+  @keyframes growBar { from { height: 0 !important; } }
+  .bar-label { position: absolute; bottom: -18px; left: 50%; transform: translateX(-50%); font-size: 0.55rem; color: rgba(253,252,250,0.45); white-space: nowrap; }
+
+  .flow { display: flex; align-items: center; gap: 0.4rem; flex-wrap: wrap; margin-bottom: 0.6rem; }
+  .flow-node { padding: 0.3rem 0.65rem; border-radius: 2px; font-size: 0.63rem; font-family: 'DM Mono', monospace; font-weight: 500; }
+  .flow-node.input { background: rgba(26,58,107,0.6); border: 1px solid rgba(100,150,255,0.3); color: #93bbff; }
+  .flow-node.process { background: rgba(200,146,42,0.15); border: 1px solid var(--border); color: var(--accent2); }
+  .flow-node.output { background: rgba(34,197,94,0.12); border: 1px solid rgba(34,197,94,0.3); color: #86efac; }
+  .flow-arrow { color: rgba(253,252,250,0.3); font-size: 0.75rem; }
+
+  .gauges { display: flex; gap: 0.8rem; justify-content: space-around; }
+  .gauge-wrap { text-align: center; }
+  .gauge-ring { width: 64px; height: 64px; border-radius: 50%; background: conic-gradient(var(--accent2) var(--pct), rgba(255,255,255,0.08) var(--pct)); display: flex; align-items: center; justify-content: center; margin: 0 auto 0.4rem; }
+  .gauge-inner { width: 48px; height: 48px; border-radius: 50%; background: #0d1b2a; display: flex; align-items: center; justify-content: center; font-size: 0.68rem; font-weight: 700; color: var(--accent2); }
+  .gauge-name { font-size: 0.58rem; color: rgba(253,252,250,0.5); }
+
+  .tl-item { display: flex; gap: 0.8rem; margin-bottom: 0.7rem; align-items: flex-start; }
+  .tl-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent2); flex-shrink: 0; margin-top: 4px; }
+  .tl-text { font-size: 0.72rem; color: rgba(253,252,250,0.65); line-height: 1.55; }
+  .tl-text strong { color: var(--accent2); }
+
+  .dash-tabs { display: flex; gap: 0.4rem; margin-bottom: 0.8rem; }
+  .dash-tab { padding: 0.3rem 0.7rem; border-radius: 2px; font-size: 0.62rem; font-family: 'DM Mono', monospace; cursor: pointer; border: 1px solid rgba(200,146,42,0.2); background: transparent; color: rgba(253,252,250,0.5); transition: all 0.2s; }
+  .dash-tab.active { background: rgba(200,146,42,0.2); color: var(--accent2); border-color: var(--accent); }
+  .dash-panel { display: none; }
+  .dash-panel.active { display: block; }
+
+  .project-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+  .tag { padding: 0.25rem 0.65rem; border-radius: 2px; font-size: 0.62rem; font-family: 'DM Mono', monospace; background: rgba(200,146,42,0.1); color: var(--accent); border: 1px solid rgba(200,146,42,0.2); }
+
+  #skills { background: var(--navy2); }
+  .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px,1fr)); gap: 1.5rem; max-width: 1100px; margin: 0 auto; }
+  .skill-card { padding: 1.8rem; background: rgba(255,255,255,0.03); border: 1px solid rgba(200,146,42,0.15); border-radius: 4px; }
+  .skill-card-title { font-family: 'Playfair Display', serif; font-size: 1rem; font-weight: 700; color: var(--accent2); margin-bottom: 1.2rem; }
+  .skill-item { margin-bottom: 0.9rem; }
+  .skill-name { font-size: 0.8rem; color: rgba(253,252,250,0.7); margin-bottom: 0.3rem; display: flex; justify-content: space-between; }
+  .skill-pct { color: var(--accent); font-family: 'DM Mono', monospace; font-size: 0.7rem; }
+  .skill-bar-bg { height: 3px; background: rgba(255,255,255,0.08); border-radius: 2px; }
+  .skill-bar-fill { height: 3px; border-radius: 2px; background: linear-gradient(90deg, var(--accent), var(--accent2)); }
+
+  #experience { background: var(--navy); }
+  .exp-timeline { max-width: 800px; margin: 0 auto; position: relative; }
+  .exp-timeline::before { content: ''; position: absolute; left: 16px; top: 0; bottom: 0; width: 1px; background: linear-gradient(to bottom, var(--accent), transparent); }
+  .exp-item { padding-left: 56px; margin-bottom: 3rem; position: relative; }
+  .exp-dot { position: absolute; left: 8px; top: 4px; width: 17px; height: 17px; border-radius: 50%; background: var(--accent2); border: 3px solid var(--navy); box-shadow: 0 0 0 1px var(--accent); }
+  .exp-period { font-family: 'DM Mono', monospace; font-size: 0.68rem; color: var(--accent); letter-spacing: 0.1em; margin-bottom: 0.3rem; }
+  .exp-role { font-family: 'Playfair Display', serif; font-size: 1.2rem; font-weight: 700; color: var(--white); }
+  .exp-company { font-size: 0.85rem; color: rgba(253,252,250,0.5); margin-bottom: 0.8rem; }
+  .exp-bullets { list-style: none; }
+  .exp-bullets li { font-size: 0.87rem; color: rgba(253,252,250,0.65); line-height: 1.7; padding: 0.25rem 0 0.25rem 1rem; position: relative; }
+  .exp-bullets li::before { content: '▪'; position: absolute; left: 0; color: var(--accent); }
+  .exp-bullets li strong { color: var(--accent2); }
+
+  #contact { background: var(--navy2); text-align: center; }
+  .contact-inner { max-width: 600px; margin: 0 auto; }
+  .contact-links { display: flex; justify-content: center; gap: 1.2rem; margin-top: 2.5rem; flex-wrap: wrap; }
+  .contact-link { display: flex; align-items: center; gap: 0.6rem; padding: 0.85rem 1.5rem; border: 1px solid var(--border); border-radius: 2px; color: var(--white); text-decoration: none; font-size: 0.85rem; transition: all 0.25s; background: rgba(255,255,255,0.03); }
+  .contact-link:hover { background: rgba(200,146,42,0.1); border-color: var(--accent2); color: var(--accent2); transform: translateY(-2px); }
+
+  footer { padding: 1.5rem 3rem; background: var(--navy); border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; font-size: 0.78rem; color: rgba(253,252,250,0.35); }
+
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+  .reveal { opacity: 0; transform: translateY(30px); transition: all 0.7s ease; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  @media (max-width: 768px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+    section { padding: 4rem 1.5rem; }
+    .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+    .hero { padding: 7rem 1.5rem 3rem; }
+    .hero-stats { gap: 1.5rem; flex-wrap: wrap; }
+    footer { flex-direction: column; gap: 0.5rem; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">E. Sophia</div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<section class="hero" id="home">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-content">
+    <div class="hero-tag">&#x2B23; Operations &middot; Data Analytics &middot; AI Workflows</div>
+    <h1>Ejiogu<br><span>Sophia</span><br>Chinaza</h1>
+    <p class="hero-sub">Executive Director &amp; Operations Strategist turning messy processes into measurable performance — using data, AI tools, and 6+ years of hands-on business leadership across construction, hospitality, and SME sectors.</p>
+    <div class="hero-stats">
+      <div class="stat-item"><div class="stat-num">40%</div><div class="stat-label">Client Growth</div></div>
+      <div class="stat-item"><div class="stat-num">95%</div><div class="stat-label">Project Success</div></div>
+      <div class="stat-item"><div class="stat-num">50+</div><div class="stat-label">Mentees Trained</div></div>
+      <div class="stat-item"><div class="stat-num">6+</div><div class="stat-label">Years Experience</div></div>
+    </div>
+    <div class="hero-cta">
+      <a href="#projects" class="btn btn-primary">View Live Projects</a>
+      <a href="#contact" class="btn btn-outline">Get In Touch</a>
+    </div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="about-grid reveal">
+    <div>
+      <div class="section-label">// Who I Am</div>
+      <h2 class="section-title">Operations meets <span>Data</span></h2>
+      <div class="about-text">
+        <p>I'm a results-driven Operations &amp; Business Support Professional with <span class="highlight">6+ years</span> delivering measurable impact across construction, hospitality, and SME sectors.</p>
+        <p>As Operations &amp; Admin Manager at Rehoboth Engineering &amp; Construction Services, I design the systems that keep projects on time, teams aligned, and finances in check — reducing approval times by <span class="highlight">20%</span> and achieving a <span class="highlight">95% on-time project completion rate</span>.</p>
+        <p>I combine hands-on operational leadership with growing data analytics skills (SQL, Python, Power BI) and a passion for AI-assisted workflow design — bridging the gap between strategy and execution in ways that actually stick.</p>
+        <p>Outside work, I mentor aspiring data analysts and advocate for <span class="highlight">women in STEM</span> — particularly in construction and engineering sectors.</p>
+      </div>
+    </div>
+    <div>
+      <div class="ach-item"><div class="ach-icon">&#x1F4C9;</div><div><div class="ach-num">20%</div><div class="ach-desc">Reduction in project approval timelines at Rehoboth Engineering</div></div></div>
+      <div class="ach-item"><div class="ach-icon">&#x1F4C8;</div><div><div class="ach-num">40%</div><div class="ach-desc">Client base expansion at Curls &amp; Bangs within 18 months</div></div></div>
+      <div class="ach-item"><div class="ach-icon">&#x1F4B0;</div><div><div class="ach-num">25%</div><div class="ach-desc">Monthly revenue increase through structured customer experience programme</div></div></div>
+      <div class="ach-item"><div class="ach-icon">&#x1F501;</div><div><div class="ach-num">30%</div><div class="ach-desc">Customer retention improvement via feedback-driven quality control</div></div></div>
+      <div class="ach-item"><div class="ach-icon">&#x23F1;</div><div><div class="ach-num">5+ hrs</div><div class="ach-desc">Weekly time saved per SME client through AI workflow automation</div></div></div>
+    </div>
+  </div>
+</section>
+
+<section id="projects">
+  <div class="reveal" style="max-width:1200px;margin:0 auto;">
+    <div class="section-label">// Live Projects</div>
+    <h2 class="section-title">Real work. <span>Real results.</span></h2>
+    <p class="section-desc">Interactive demonstrations of the frameworks, dashboards, and systems I've built. Every metric shown is drawn from real project outcomes.</p>
+  </div>
+
+  <div class="projects-grid reveal">
+
+    <!-- P1 -->
+    <div class="project-card">
+      <div class="project-header">
+        <div class="project-type">// Data Visualization &middot; Power BI &middot; Project Management</div>
+        <div class="project-title">Construction Project Analytics Dashboard</div>
+      </div>
+      <div class="project-body">
+        <p class="project-desc">Live KPI dashboard tracking project timelines, budget utilization, and cross-team delivery metrics across 15+ concurrent engineering projects at Rehoboth Engineering.</p>
+        <div class="demo-area">
+          <div class="demo-label"><span class="live-dot"></span> Live Metrics — Project Portfolio</div>
+          <div class="metrics-row" style="margin-bottom:1rem;">
+            <div class="metric-box"><div class="metric-num">95%</div><div class="metric-lbl">On-Time Rate</div></div>
+            <div class="metric-box"><div class="metric-num">20%</div><div class="metric-lbl">Time Saved</div></div>
+            <div class="metric-box"><div class="metric-num">15%</div><div class="metric-lbl">Cost Reduced</div></div>
+          </div>
+          <div class="bar-chart">
+            <div class="bar" style="height:68%"><span class="bar-label">Q1</span></div>
+            <div class="bar" style="height:75%;animation-delay:0.1s"><span class="bar-label">Q2</span></div>
+            <div class="bar" style="height:82%;animation-delay:0.2s"><span class="bar-label">Q3</span></div>
+            <div class="bar" style="height:95%;animation-delay:0.3s"><span class="bar-label">Q4</span></div>
+          </div>
+          <div style="font-size:0.57rem;color:rgba(253,252,250,0.35);margin-top:0.4rem;">On-time completion rate by quarter</div>
+        </div>
+        <div class="project-tags"><span class="tag">Power BI</span><span class="tag">Data Visualization</span><span class="tag">KPI Tracking</span><span class="tag">Operations</span></div>
+      </div>
+    </div>
+
+    <!-- P2 -->
+    <div class="project-card">
+      <div class="project-header">
+        <div class="project-type">// AI Automation &middot; Workflow Design &middot; SME</div>
+        <div class="project-title">AI Workflow Automation System</div>
+      </div>
+      <div class="project-body">
+        <p class="project-desc">Designed and deployed intelligent automation workflows for 5+ SME clients — reducing manual workload by 40% and saving 5+ hours per week through AI-powered process optimisation.</p>
+        <div class="demo-area">
+          <div class="demo-label"><span class="live-dot"></span> Workflow Architecture</div>
+          <div class="flow">
+            <div class="flow-node input">Client Request</div><div class="flow-arrow">&#8594;</div>
+            <div class="flow-node process">AI Triage</div><div class="flow-arrow">&#8594;</div>
+            <div class="flow-node process">Auto-Route</div><div class="flow-arrow">&#8594;</div>
+            <div class="flow-node output">Resolved &#10003;</div>
+          </div>
+          <div class="flow">
+            <div class="flow-node input">Task Queue</div><div class="flow-arrow">&#8594;</div>
+            <div class="flow-node process">Priority Sort</div><div class="flow-arrow">&#8594;</div>
+            <div class="flow-node process">Assign + Track</div><div class="flow-arrow">&#8594;</div>
+            <div class="flow-node output">Delivered &#10003;</div>
+          </div>
+          <div class="metrics-row" style="margin-top:0.8rem;">
+            <div class="metric-box"><div class="metric-num">40%</div><div class="metric-lbl">Workload Cut</div></div>
+            <div class="metric-box"><div class="metric-num">5+</div><div class="metric-lbl">Hrs/Wk Saved</div></div>
+            <div class="metric-box"><div class="metric-num">5</div><div class="metric-lbl">Clients Served</div></div>
+          </div>
+        </div>
+        <div class="project-tags"><span class="tag">AI Automation</span><span class="tag">ChatGPT</span><span class="tag">Process Design</span><span class="tag">SOP Development</span></div>
+      </div>
+    </div>
+
+    <!-- P3 -->
+    <div class="project-card">
+      <div class="project-header">
+        <div class="project-type">// Business Analytics &middot; Hospitality &middot; Growth</div>
+        <div class="project-title">Revenue &amp; Customer Retention Analytics</div>
+      </div>
+      <div class="project-body">
+        <p class="project-desc">Data-driven operational overhaul at Curls &amp; Bangs Beauty &amp; Hotel — built customer feedback loops, retention tracking, and inventory analytics transforming business performance within 18 months.</p>
+        <div class="demo-area">
+          <div class="demo-label"><span class="live-dot"></span> Business Performance Gauges</div>
+          <div class="gauges">
+            <div class="gauge-wrap"><div class="gauge-ring" style="--pct:40%"><div class="gauge-inner">40%</div></div><div class="gauge-name">Client Growth</div></div>
+            <div class="gauge-wrap"><div class="gauge-ring" style="--pct:30%"><div class="gauge-inner">30%</div></div><div class="gauge-name">Retention</div></div>
+            <div class="gauge-wrap"><div class="gauge-ring" style="--pct:25%"><div class="gauge-inner">25%</div></div><div class="gauge-name">Revenue &#8593;</div></div>
+          </div>
+        </div>
+        <div class="project-tags"><span class="tag">Customer Analytics</span><span class="tag">Retention Strategy</span><span class="tag">Data Analysis</span><span class="tag">Hospitality Ops</span></div>
+      </div>
+    </div>
+
+    <!-- P4 -->
+    <div class="project-card">
+      <div class="project-header">
+        <div class="project-type">// Training Design &middot; Social Media Analytics &middot; EdTech</div>
+        <div class="project-title">Data Analytics Training Programme</div>
+      </div>
+      <div class="project-body">
+        <p class="project-desc">Designed and facilitated a comprehensive data analytics curriculum for social media marketing at Flourish Rapidly Fellowship — training 50+ participants with a 95%+ task completion rate.</p>
+        <div class="demo-area">
+          <div class="demo-label"><span class="live-dot"></span> Programme Dashboard</div>
+          <div class="dash-tabs">
+            <button class="dash-tab active" onclick="switchTab(this,'c1')">Cohort 1</button>
+            <button class="dash-tab" onclick="switchTab(this,'c2')">Cohort 2</button>
+            <button class="dash-tab" onclick="switchTab(this,'c3')">Cohort 3</button>
+          </div>
+          <div id="c1" class="dash-panel active"><div class="metrics-row"><div class="metric-box"><div class="metric-num">18</div><div class="metric-lbl">Participants</div></div><div class="metric-box"><div class="metric-num">94%</div><div class="metric-lbl">Completion</div></div><div class="metric-box"><div class="metric-num">4.9</div><div class="metric-lbl">Avg Rating</div></div></div></div>
+          <div id="c2" class="dash-panel"><div class="metrics-row"><div class="metric-box"><div class="metric-num">21</div><div class="metric-lbl">Participants</div></div><div class="metric-box"><div class="metric-num">96%</div><div class="metric-lbl">Completion</div></div><div class="metric-box"><div class="metric-num">4.8</div><div class="metric-lbl">Avg Rating</div></div></div></div>
+          <div id="c3" class="dash-panel"><div class="metrics-row"><div class="metric-box"><div class="metric-num">14</div><div class="metric-lbl">Participants</div></div><div class="metric-box"><div class="metric-num">93%</div><div class="metric-lbl">Completion</div></div><div class="metric-box"><div class="metric-num">4.7</div><div class="metric-lbl">Avg Rating</div></div></div></div>
+        </div>
+        <div class="project-tags"><span class="tag">Curriculum Design</span><span class="tag">Social Media Analytics</span><span class="tag">Remote Training</span><span class="tag">Facilitation</span></div>
+      </div>
+    </div>
+
+    <!-- P5 -->
+    <div class="project-card">
+      <div class="project-header">
+        <div class="project-type">// Process Design &middot; Documentation &middot; SME Consulting</div>
+        <div class="project-title">SME Operational SOP Framework</div>
+      </div>
+      <div class="project-body">
+        <p class="project-desc">Built plug-and-play Standard Operating Procedure systems for 5+ small businesses — covering task tracking, customer request handling, and daily operations. Reduced average response time by 40%.</p>
+        <div class="demo-area">
+          <div class="demo-label"><span class="live-dot"></span> SOP Implementation Timeline</div>
+          <div class="tl-item"><div class="tl-dot"></div><div class="tl-text"><strong>Week 1:</strong> Business audit — map existing workflows, identify 3-5 critical bottlenecks</div></div>
+          <div class="tl-item"><div class="tl-dot"></div><div class="tl-text"><strong>Week 2:</strong> Design task-tracking system + customer request workflows in Google Sheets</div></div>
+          <div class="tl-item"><div class="tl-dot"></div><div class="tl-text"><strong>Week 3:</strong> Introduce AI-assisted automation for repetitive communication tasks</div></div>
+          <div class="tl-item"><div class="tl-dot"></div><div class="tl-text"><strong>Week 4:</strong> Train owner and team, hand over SOPs &rarr; <strong style="color:#22c55e">avg 40% faster response time</strong></div></div>
+        </div>
+        <div class="project-tags"><span class="tag">SOP Design</span><span class="tag">Google Workspace</span><span class="tag">SME Consulting</span><span class="tag">Process Optimization</span></div>
+      </div>
+    </div>
+
+    <!-- P6 -->
+    <div class="project-card">
+      <div class="project-header">
+        <div class="project-type">// SQL &middot; Python &middot; Financial Analysis</div>
+        <div class="project-title">Operational Cost Reduction Analysis</div>
+      </div>
+      <div class="project-body">
+        <p class="project-desc">Comprehensive data analysis of administrative operational expenses at Rehoboth Engineering — identifying inefficiencies and implementing targeted solutions that reduced unnecessary expenditure by 15%.</p>
+        <div class="demo-area">
+          <div class="demo-label"><span class="live-dot"></span> Expenditure: Before vs After</div>
+          <div style="display:flex;gap:0.5rem;align-items:flex-end;height:70px;padding-bottom:18px;position:relative;margin-bottom:0.4rem;">
+            <div style="flex:1;display:flex;gap:3px;align-items:flex-end;height:100%;">
+              <div style="flex:1;height:90%;background:rgba(200,146,42,0.2);border-radius:2px 2px 0 0;border:1px solid rgba(200,146,42,0.3);"></div>
+              <div style="flex:1;height:76%;background:linear-gradient(to top,#c8922a,#e8b44a);border-radius:2px 2px 0 0;"></div>
+            </div>
+            <div style="flex:1;display:flex;gap:3px;align-items:flex-end;height:100%;">
+              <div style="flex:1;height:70%;background:rgba(200,146,42,0.2);border-radius:2px 2px 0 0;border:1px solid rgba(200,146,42,0.3);"></div>
+              <div style="flex:1;height:58%;background:linear-gradient(to top,#c8922a,#e8b44a);border-radius:2px 2px 0 0;"></div>
+            </div>
+            <div style="flex:1;display:flex;gap:3px;align-items:flex-end;height:100%;">
+              <div style="flex:1;height:80%;background:rgba(200,146,42,0.2);border-radius:2px 2px 0 0;border:1px solid rgba(200,146,42,0.3);"></div>
+              <div style="flex:1;height:66%;background:linear-gradient(to top,#c8922a,#e8b44a);border-radius:2px 2px 0 0;"></div>
+            </div>
+            <div style="position:absolute;bottom:-18px;left:0;right:0;display:flex;gap:0.5rem;">
+              <div style="flex:1;text-align:center;font-size:0.52rem;color:rgba(253,252,250,0.4);">Admin</div>
+              <div style="flex:1;text-align:center;font-size:0.52rem;color:rgba(253,252,250,0.4);">Procurement</div>
+              <div style="flex:1;text-align:center;font-size:0.52rem;color:rgba(253,252,250,0.4);">Overhead</div>
+            </div>
+          </div>
+          <div style="display:flex;gap:1rem;margin-top:0.8rem;">
+            <div style="display:flex;align-items:center;gap:0.4rem;font-size:0.6rem;color:rgba(253,252,250,0.45);"><div style="width:10px;height:10px;background:rgba(200,146,42,0.2);border:1px solid rgba(200,146,42,0.3);border-radius:1px;"></div>Before</div>
+            <div style="display:flex;align-items:center;gap:0.4rem;font-size:0.6rem;color:rgba(253,252,250,0.45);"><div style="width:10px;height:10px;background:var(--accent2);border-radius:1px;"></div>After (&#8722;15%)</div>
+          </div>
+        </div>
+        <div class="project-tags"><span class="tag">SQL</span><span class="tag">Python</span><span class="tag">Cost Analysis</span><span class="tag">Financial Data</span></div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section id="skills">
+  <div class="reveal" style="max-width:1100px;margin:0 auto;">
+    <div class="section-label">// Skills &amp; Expertise</div>
+    <h2 class="section-title">What I bring <span>to the table</span></h2>
+    <p class="section-desc">A rare blend of operational leadership, data analytics, and AI workflow design — built through real-world application, not just coursework.</p>
+  </div>
+  <div class="skills-grid reveal">
+    <div class="skill-card">
+      <div class="skill-card-title">&#x1F4CA; Data &amp; Analytics</div>
+      <div class="skill-item"><div class="skill-name"><span>Data Analysis &amp; Interpretation</span><span class="skill-pct">90%</span></div><div class="skill-bar-bg"><div class="skill-bar-fill" style="width:90%"></div></div></div>
+      <div class="skill-item"><div class="skill-name"><span>Power BI / Visualization</span><span class="skill-pct">78%</span></div><div class="skill-bar-bg"><div class="skill-bar-fill" style="width:78%"></div></div></div>
+      <div class="skill-item"><div class="skill-name"><span>SQL</span><span class="skill-pct">65%</span></div><div class="skill-bar-bg"><div class="skill-bar-fill" style="width:65%"></div></div></div>
+      <div class="skill-item"><div class="skill-name"><span>Python for Data</span><span class="skill-pct">60%</span></div><div class="skill-bar-bg"><div class="skill-bar-fill" style="width:60%"></div></div></div>
+      <div class="skill-item"><div class="skill-name"><span>Social Media Analytics</span><span class="skill-pct">85%</span></div><div class="skill-bar-bg"><div class="skill-bar-fill" style="width:85%"></div></div></div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-card-title">&#x2699;&#xFE0F; Operations &amp; Management</div>
+      <div class="skill-item"><div class="skill-name"><span>Workflow &amp; Process Design</span><span class="skill-pct">95%</span></div><div class="skill-bar-bg"><div class="skill-bar-fill" style="width:95%"></div></div></div>
+      <div class="skill-item"><div class="skill-name"><span>Cross-functional Coordination</span><span class="skill-pct">92%</span></div><div class="skill-bar-bg"><div class="skill-bar-fill" style="width:92%"></div></div></div>
+      <div class="skill-item"><div class="skill-name"><span>Budget &amp; Resource Management</span><span class="skill-pct">85%</span></div><div class="skill-bar-bg"><div class="skill-bar-fill" style="width:85%"></div></div></div>
+      <div class="skill-item"><div class="skill-name"><span>SOP Development</span><span class="skill-pct">90%</span></div><div class="skill-bar-bg"><div class="skill-bar-fill" style="width:90%"></div></div></div>
+      <div class="skill-item"><div class="skill-name"><span>Quality Control &amp; Compliance</span><span class="skill-pct">88%</span></div><div class="skill-bar-bg"><div class="skill-bar-fill" style="width:88%"></div></div></div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-card-title">&#x1F916; AI &amp; Digital Tools</div>
+      <div class="skill-item"><div class="skill-name"><span>AI Workflow Design (ChatGPT)</span><span class="skill-pct">88%</span></div><div class="skill-bar-bg"><div class="skill-bar-fill" style="width:88%"></div></div></div>
+      <div class="skill-item"><div class="skill-name"><span>Google Workspace Suite</span><span class="skill-pct">95%</span></div><div class="skill-bar-bg"><div class="skill-bar-fill" style="width:95%"></div></div></div>
+      <div class="skill-item"><div class="skill-name"><span>Microsoft Office Suite</span><span class="skill-pct">90%</span></div><div class="skill-bar-bg"><div class="skill-bar-fill" style="width:90%"></div></div></div>
+      <div class="skill-item"><div class="skill-name"><span>Remote Collaboration Tools</span><span class="skill-pct">85%</span></div><div class="skill-bar-bg"><div class="skill-bar-fill" style="width:85%"></div></div></div>
+      <div class="skill-item"><div class="skill-name"><span>Process Automation</span><span class="skill-pct">75%</span></div><div class="skill-bar-bg"><div class="skill-bar-fill" style="width:75%"></div></div></div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-card-title">&#x1F393; Certifications</div>
+      <div class="tl-item"><div class="tl-dot"></div><div class="tl-text"><strong>Data Analytics Certificate</strong><br>ALX Africa</div></div>
+      <div class="tl-item"><div class="tl-dot"></div><div class="tl-text"><strong>AI for Career Essentials</strong><br>ALX Africa</div></div>
+      <div class="tl-item"><div class="tl-dot"></div><div class="tl-text"><strong>B.Sc. Animal &amp; Environmental Biology</strong><br>University of Port Harcourt, 2018</div></div>
+      <div class="tl-item"><div class="tl-dot"></div><div class="tl-text"><strong>Technical Facilitator</strong><br>Flourish Rapidly Fellowship, 2025&#8211;Present</div></div>
+    </div>
+  </div>
+</section>
+
+<section id="experience">
+  <div class="reveal" style="max-width:800px;margin:0 auto 3rem;">
+    <div class="section-label">// Work History</div>
+    <h2 class="section-title">Where I've <span>created impact</span></h2>
+  </div>
+  <div class="exp-timeline reveal">
+    <div class="exp-item">
+      <div class="exp-dot"></div>
+      <div class="exp-period">2023 &#8211; 2024</div>
+      <div class="exp-role">Operations &amp; Admin Manager</div>
+      <div class="exp-company">Rehoboth Engineering &amp; Construction Services Ltd, Nigeria</div>
+      <ul class="exp-bullets">
+        <li>Drove a <strong>20% reduction in project approval timelines</strong> by redesigning follow-up protocols across 10+ concurrent projects</li>
+        <li>Achieved <strong>95% on-time project completion rate</strong> by coordinating cross-functional communication and eliminating bottlenecks</li>
+        <li>Reduced unnecessary expenditure by <strong>15%</strong> through budget review checkpoints and resource allocation overhaul</li>
+        <li>Reported directly to CEO; aligned 4 departmental directors on strategic priorities</li>
+      </ul>
+    </div>
+    <div class="exp-item">
+      <div class="exp-dot"></div>
+      <div class="exp-period">2023 &#8211; Present</div>
+      <div class="exp-role">Business Operations Consultant (Freelance)</div>
+      <div class="exp-company">Remote &#8212; SME Clients</div>
+      <ul class="exp-bullets">
+        <li>Architected operational frameworks for <strong>5+ small businesses</strong>, reducing response time by an average of <strong>40%</strong></li>
+        <li>Leveraged AI tools to automate repetitive processes, saving clients <strong>5+ hours per week</strong></li>
+        <li>Delivered structured task-tracking, SOP systems, and customer request workflows</li>
+      </ul>
+    </div>
+    <div class="exp-item">
+      <div class="exp-dot"></div>
+      <div class="exp-period">Sept 2025 &#8211; Present</div>
+      <div class="exp-role">Technical Facilitator (Freelance, Remote)</div>
+      <div class="exp-company">Flourish Rapidly Fellowship</div>
+      <ul class="exp-bullets">
+        <li>Facilitated training for <strong>50+ participants</strong> on data analytics, social media analytics, and AI automation tools</li>
+        <li>Achieved <strong>95%+ task completion rate</strong> by simplifying technical concepts into actionable step-by-step guides</li>
+      </ul>
+    </div>
+    <div class="exp-item">
+      <div class="exp-dot"></div>
+      <div class="exp-period">2020 &#8211; 2022</div>
+      <div class="exp-role">Operations Manager</div>
+      <div class="exp-company">Curls and Bangs Beauty &amp; Hotel, Port Harcourt</div>
+      <ul class="exp-bullets">
+        <li>Scaled client base by <strong>40%</strong> and boosted monthly revenue by <strong>25%</strong> within 18 months</li>
+        <li>Improved customer retention by <strong>30%</strong> via a feedback-driven quality control system</li>
+        <li>Streamlined inventory and supplier coordination, reducing supply delays by an estimated <strong>35%</strong></li>
+      </ul>
+    </div>
+    <div class="exp-item">
+      <div class="exp-dot"></div>
+      <div class="exp-period">2018 &#8211; 2020</div>
+      <div class="exp-role">Management Intern</div>
+      <div class="exp-company">Just Triumph Foods, Nigeria</div>
+      <ul class="exp-bullets">
+        <li>Analyzed production metrics identifying <strong>3 key inefficiencies</strong>, contributing to measurable workflow improvements</li>
+        <li>Supported quality control, inventory management, and supplier coordination</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="contact-inner reveal">
+    <div class="section-label">// Let's Connect</div>
+    <h2 class="section-title">Ready to <span>work together?</span></h2>
+    <p class="section-desc" style="margin:0 auto;">I'm open to operations, data analytics, and business consulting opportunities &#8212; remote or Port Harcourt based. Let's build something that actually works.</p>
+    <div class="contact-links">
+      <a href="/cdn-cgi/l/email-protection#6b0e0102040c1e18041b03020a080302050a110a2b0c060a020745080406" class="contact-link"><span>&#x2709;</span> <span class="__cf_email__" data-cfemail="47222d2e2820323428372f2e26242f2e29263d2607202a262e2b6924282a">[email&#160;protected]</span></a>
+      <a href="tel:+2348135968020" class="contact-link"><span>&#x1F4DE;</span> +234 813 596 8020</a>
+      <a href="https://psowfya.github.io/sophia-portfolio/" target="_blank" class="contact-link"><span>&#x1F310;</span> Portfolio</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div>&#169; 2026 Ejiogu Sophia Chinaza &#8212; Port Harcourt, Nigeria</div>
+  <div style="font-family:'DM Mono',monospace;font-size:0.68rem;color:rgba(253,252,250,0.25);">Operations &middot; Data &middot; AI Workflows</div>
+</footer>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) setTimeout(() => e.target.classList.add('visible'), i * 80);
+    });
+  }, { threshold: 0.08 });
+  reveals.forEach(el => observer.observe(el));
+
+  function switchTab(btn, panelId) {
+    btn.closest('.demo-area').querySelectorAll('.dash-tab').forEach(t =>
